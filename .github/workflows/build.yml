@@ -56,43 +56,44 @@ jobs:
     - name: 🧩 Setup profile
       run: |
         cd ~/teemo/woof-CE
-            mkdir -p woof-out_x86_64
-      cp -r woof-distro/x86_64/slackware64/s15pup64 woof-out_x86_64/teemocat        
+            mkdir -p woof-out-x86-64
+            cp -r woof-distro/x86_64/slackware64/s15pup64 woof-out-x86-64/teemocat
+            
     - name: ✂️ Trim profile
       run: |
         chmod +x scripts/trim-profile.sh
         AGGRESSIVE_TRIM=${{ github.event.inputs.aggressive_trim || 'no' }} \
-          ./scripts/trim-profile.sh ~/teemo/woof-CE/woof-out_x86_64/teemocat
+          ./scripts/trim-profile.sh ~/teemo/woof-CE/woof-out-x86-64/teemocat
           
     - name: 🔗 Run merge2out
       run: |
         cd ~/teemo/woof-CE
-        ./merge2out woof-out_x86_64/teemocat
+        ./merge2out woof-out-x86-64/teemocat
         
     - name: 🏗️ Build ISO - Step 1/4 (0setup)
       run: |
-        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
         ./0setup
         
     - name: 📥 Build ISO - Step 2/4 (1download)
       run: |
-        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
         timeout 3600 ./1download || echo "Download step completed with warnings"
         
     - name: 📦 Build ISO - Step 3/4 (2createpackages)
       run: |
-        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
         ./2createpackages
         
     - name: 🎯 Build ISO - Step 4/4 (3builddistro-Z)
       run: |
-        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
         ./3builddistro-Z
         
     - name: 📏 Check ISO size
       id: check_size
       run: |
-        ISO_FILE=$(find ~/teemo/woof-CE/woof-out_x86_64/teemocat/woof-output -name "*.iso" -type f | head -n 1)
+        ISO_FILE=$(find ~/teemo/woof-CE/woof-out-x86-64/teemocat/woof-output -name "*.iso" -type f | head -n 1)
         if [ -n "$ISO_FILE" ]; then
           ISO_SIZE=$(stat -c%s "$ISO_FILE")
           ISO_SIZE_MB=$((ISO_SIZE / 1024 / 1024))
