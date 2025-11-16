@@ -127,11 +127,13 @@ disable_package() {
     
     # Disable pakken
     if grep -q "^yes|${pkg}|" "$file" 2>/dev/null; then
-        sed -i "s/^yes|${pkg}|/no|${pkg}|/" "$file"
+        sed -i "s/^yes|${pkg}|/no|${pkg}|/" "$file" || true
         log_info "Disabled: $pkg"
         return 0
     fi
     
+    # Pakke ikke funnet - ikke en feil
+    return 0
 }
 
 # ✂️ Trim alle specs-filer
@@ -145,17 +147,17 @@ for specs_file in "${SPECS_FILES[@]}"; do
     
     # Disable alle REMOVE_PACKAGES
     for pkg_pattern in "${REMOVE_PACKAGES[@]}"; do
-        while IFS= read -r line; do
+        while IFS= read -r line || [[ -n "$line" ]]; do
             if [[ "$line" =~ ^yes\|([^|]+)\| ]]; then
                 pkg_name="${BASH_REMATCH[1]}"
                 if [[ "$pkg_name" == *"$pkg_pattern"* ]]; then
                     if disable_package "$pkg_name" "$specs_file"; then
-                        ((DISABLED_COUNT++))
+                        DISABLED_COUNT=$((DISABLED_COUNT + 1))
                     fi
                 fi
             fi
         done < "$specs_file"
-    done
+    done || true
     
     log_success "Disabled $DISABLED_COUNT pakker i $(basename "$specs_file")"
 done
