@@ -132,11 +132,9 @@ disable_package() {
         return 0
     fi
     
-    return 1
 }
 
 # ✂️ Trim alle specs-filer
-for specs_file in "${SPECS_FILES[@]}"; do
     log_info "Prosesserer: $(basename "$specs_file")"
     
     # Backup original
