@@ -1,0 +1,154 @@
+name: 🏗️ Build Teemo Cat Edition ISO
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      aggressive_trim:
+        description: 'Use aggressive trimming'
+        required: false
+        default: 'no'
+        type: choice
+        options:
+          - 'no'
+          - 'yes'
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-22.04
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 💾 Free up disk space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        df -h
+        
+    - name: 🛠️ Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git curl rsync bc build-essential zstd xz-utils \
+          squashfs-tools dosfstools syslinux-utils genisoimage cpio \
+          wget gawk sed tar bzip2 xorriso coreutils util-linux pv
+          
+    - name: 📊 Show system info
+      run: |
+        echo "=== System Information ==="
+        uname -a
+        df -h
+        free -h
+        nproc
+        
+    - name: 🐾 Clone woof-CE
+      run: |
+        mkdir -p ~/teemo
+        cd ~/teemo
+        git clone --depth 1 https://github.com/woof-CE/woof-CE.git
+        
+    - name: 🧩 Setup profile
+      run: |
+        cd ~/teemo/woof-CE
+        cp -r woof-distro/x86_64/slacko64 woof-out_x86_64/teemocat
+        
+    - name: ✂️ Trim profile
+      run: |
+        chmod +x scripts/trim-profile.sh
+        AGGRESSIVE_TRIM=${{ github.event.inputs.aggressive_trim || 'no' }} \
+          ./scripts/trim-profile.sh ~/teemo/woof-CE/woof-out_x86_64/teemocat
+          
+    - name: 🔗 Run merge2out
+      run: |
+        cd ~/teemo/woof-CE
+        ./merge2out woof-out_x86_64/teemocat
+        
+    - name: 🏗️ Build ISO - Step 1/4 (0setup)
+      run: |
+        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        ./0setup
+        
+    - name: 📥 Build ISO - Step 2/4 (1download)
+      run: |
+        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        timeout 3600 ./1download || echo "Download step completed with warnings"
+        
+    - name: 📦 Build ISO - Step 3/4 (2createpackages)
+      run: |
+        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        ./2createpackages
+        
+    - name: 🎯 Build ISO - Step 4/4 (3builddistro-Z)
+      run: |
+        cd ~/teemo/woof-CE/woof-out_x86_64/teemocat
+        ./3builddistro-Z
+        
+    - name: 📏 Check ISO size
+      id: check_size
+      run: |
+        ISO_FILE=$(find ~/teemo/woof-CE/woof-out_x86_64/teemocat/woof-output -name "*.iso" -type f | head -n 1)
+        if [ -n "$ISO_FILE" ]; then
+          ISO_SIZE=$(stat -c%s "$ISO_FILE")
+          ISO_SIZE_MB=$((ISO_SIZE / 1024 / 1024))
+          echo "iso_path=$ISO_FILE" >> $GITHUB_OUTPUT
+          echo "iso_size_mb=$ISO_SIZE_MB" >> $GITHUB_OUTPUT
+          echo "✅ ISO built: $ISO_FILE"
+          echo "📊 Size: ${ISO_SIZE_MB} MB"
+          
+          if [ $ISO_SIZE_MB -gt 3072 ]; then
+            echo "❌ ISO exceeds 3 GB limit!"
+            exit 1
+          elif [ $ISO_SIZE_MB -gt 900 ]; then
+            echo "⚠️ ISO exceeds 900 MB target"
+          else
+            echo "✅ ISO size within target!"
+          fi
+        else
+          echo "❌ No ISO file found!"
+          exit 1
+        fi
+        
+    - name: 🎉 Prepare artifact
+      run: |
+        mkdir -p artifacts
+        cp ${{ steps.check_size.outputs.iso_path }} artifacts/TeemoCat-${{ github.sha }}.iso
+        echo "${{ steps.check_size.outputs.iso_size_mb }} MB" > artifacts/SIZE.txt
+        echo "Built from commit ${{ github.sha }}" > artifacts/BUILD_INFO.txt
+        echo "Date: $(date)" >> artifacts/BUILD_INFO.txt
+        
+    - name: 📤 Upload ISO artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: TeemoCat-ISO
+        path: artifacts/
+        retention-days: 30
+        
+    - name: 📊 Create build summary
+      run: |
+        echo "## 🎉 Build Successful!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 ISO Information" >> $GITHUB_STEP_SUMMARY
+        echo "- **Size:** ${{ steps.check_size.outputs.iso_size_mb }} MB" >> $GITHUB_STEP_SUMMARY
+        echo "- **Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📥 Download" >> $GITHUB_STEP_SUMMARY
+        echo "Go to the **Artifacts** section above to download the ISO." >> $GITHUB_STEP_SUMMARY
+        
+    - name: 💬 Comment on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## 🎉 ISO Build Complete!\n\n**Size:** ${{ steps.check_size.outputs.iso_size_mb }} MB\n\n📥 Download from [Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+          })

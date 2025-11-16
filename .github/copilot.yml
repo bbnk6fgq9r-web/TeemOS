@@ -1,0 +1,29 @@
+version: 1
+instructions:
+  - |
+    Du jobber i et prosjekt som bygger en minimal Puppy Linux ISO
+    ("Teemo Cat Edition") med woof‑CE. Viktige krav:
+
+    ⚡ ISO må være under 3 GB (helst 300–900 MB).
+    ⚡ Bruk lett baseprofiler (Slacko, Debian‑lite).
+    ⚡ Fjern tunge språkpakker og multimedia.
+    ⚡ Bruk lett skrivebord (LXDE/Openbox).
+    ⚡ Nettleser: NetSurf eller Pale Moon.
+    ⚡ Resultatet skal ligge i woof-output/ som TeemoCat.iso.
+
+    Når du foreslår kode eller scripts:
+    - Hold det copy‑paste‑vennlig.
+    - Bruk emoji‑markører i kommentarer for å gjøre stegene tydelige.
+    - Prioriter minimalisme og lav størrelse.
+    - Husk at sluttresultatet skal kunne flashes til en USB ≤ 3 GB.
+  - |
+    😺 Teemo Cat Edition – Copilot instruksjon
+
+    Dette repoet bygger en minimal Puppy Linux ISO med woof‑CE.
+    Copilot skal hjelpe med:
+
+    - Skript for byggesekvens (`merge2out → 0setup → 1download → 2createpackages → 3builddistro-Z`)
+    - Tips for trimming pakker og holde ISO < 3 GB
+    - Copy‑paste‑vennlige kommandoer med emoji‑markører
+    - Fokus på lettvekts skrivebord og små nettlesere
+    - ISO‑filen skal ende opp i `woof-output/` som `TeemoCat.iso`

@@ -1,0 +1,160 @@
+# 📦 Teemo Cat Edition - Minimal Package List
+# Denne filen definerer hvilke pakker som skal inkluderes i ISO-en
+# Format: pakkenavn | beskrivelse | kategori
+
+# ═══════════════════════════════════════════════════════════════════
+# 🖥️ SKRIVEBORDSMILJØ (LXDE + Openbox)
+# ═══════════════════════════════════════════════════════════════════
+lxde | Lightweight X11 Desktop Environment | desktop
+openbox | Minimalist window manager | desktop
+pcmanfm | Lightweight file manager | desktop
+lxterminal | Terminal emulator for LXDE | desktop
+lxpanel | Desktop panel for LXDE | desktop
+lxappearance | Theme switcher for LXDE | desktop
+lxsession | Session manager for LXDE | desktop
+obconf | Openbox configuration tool | desktop
+
+# ═══════════════════════════════════════════════════════════════════
+# 🌐 NETTLESER
+# ═══════════════════════════════════════════════════════════════════
+netsurf | Lightweight web browser | browser
+dillo | Ultra-light graphical browser | browser
+links2 | Text-mode browser with graphics | browser
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎨 X.ORG (MINIMAL)
+# ═══════════════════════════════════════════════════════════════════
+xorg-server | X Window System server | xorg
+xorg-minimal | Minimal X.org package | xorg
+xvesa | VESA driver for X | xorg
+xterm | Standard terminal emulator | xorg
+xinit | X initialization | xorg
+
+# ═══════════════════════════════════════════════════════════════════
+# 🛠️ GRUNNLEGGENDE UTILS
+# ═══════════════════════════════════════════════════════════════════
+busybox | Swiss Army knife of Linux | utils
+coreutils | GNU core utilities | utils
+util-linux | Miscellaneous system utilities | utils
+bash | Bourne Again SHell | shell
+dash | Debian Almquist Shell (fast) | shell
+ncurses | Terminal control library | library
+readline | Command line editing library | library
+zlib | Compression library | library
+bzip2 | High-quality data compressor | utils
+xz | LZMA compression utilities | utils
+gzip | GNU zip compression | utils
+
+# ═══════════════════════════════════════════════════════════════════
+# 📁 FILHÅNDTERING
+# ═══════════════════════════════════════════════════════════════════
+rox-filer | Fast, lightweight file manager | filemanager
+thunar | Modern file manager (Xfce) | filemanager
+mc | Midnight Commander | filemanager
+ranger | Console file manager with VI key bindings | filemanager
+
+# ═══════════════════════════════════════════════════════════════════
+# 🌐 NETTVERK
+# ═══════════════════════════════════════════════════════════════════
+dhcpcd | DHCP client daemon | network
+wpa_supplicant | WPA authentication | network
+iw | Wireless configuration tool | network
+wireless-tools | Wireless tools | network
+network-manager-minimal | Network management | network
+connman | Connection manager | network
+
+# ═══════════════════════════════════════════════════════════════════
+# 📝 TEKSTREDIGERING
+# ═══════════════════════════════════════════════════════════════════
+nano | Simple text editor | editor
+vim-tiny | Minimal Vi Improved | editor
+leafpad | Lightweight GTK+ text editor | editor
+geany-light | Fast and lightweight IDE | editor
+mousepad | Simple text editor | editor
+
+# ═══════════════════════════════════════════════════════════════════
+# 🖼️ BILDEVISERE
+# ═══════════════════════════════════════════════════════════════════
+feh | Lightweight image viewer | graphics
+gpicview | Simple and fast image viewer | graphics
+viewnior | Elegant image viewer | graphics
+
+# ═══════════════════════════════════════════════════════════════════
+# 📦 PAKKEHÅNDTERING
+# ═══════════════════════════════════════════════════════════════════
+petget | Puppy package manager | package
+gslapt | GTK Slackware package tool | package
+ppm | Puppy Package Manager | package
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 SYSTEMVERKTØY
+# ═══════════════════════════════════════════════════════════════════
+htop | Interactive process viewer | system
+psmisc | Utilities for managing processes | system
+procps | /proc file system utilities | system
+sysvinit | System V init | system
+udev | Device manager | system
+eudev | Fork of udev | system
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎵 LETTE MULTIMEDIA (VALGFRITT)
+# ═══════════════════════════════════════════════════════════════════
+# Kommentert ut som standard - fjern # for å inkludere
+# mpv | Lightweight video player | multimedia
+# deadbeef | Lightweight audio player | multimedia
+# alsa-utils | ALSA sound utilities | multimedia
+
+# ═══════════════════════════════════════════════════════════════════
+# 📄 PDF/DOKUMENTVISERE (VALGFRITT)
+# ═══════════════════════════════════════════════════════════════════
+# Kommentert ut som standard - fjern # for å inkludere
+# mupdf | Lightweight PDF viewer | document
+# zathura | Document viewer | document
+# abiword-minimal | Lightweight word processor | document
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔐 SIKKERHET
+# ═══════════════════════════════════════════════════════════════════
+gnupg | GNU Privacy Guard | security
+openssl | SSL/TLS toolkit | security
+ca-certificates | Common CA certificates | security
+
+# ═══════════════════════════════════════════════════════════════════
+# 🗜️ ARKIVVERKTØY
+# ═══════════════════════════════════════════════════════════════════
+tar | GNU tape archiver | archive
+unzip | De-archiver for .zip files | archive
+zip | Archiver for .zip files | archive
+p7zip | 7-Zip file archiver | archive
+
+# ═══════════════════════════════════════════════════════════════════
+# 📊 FONT OG RENDERING
+# ═══════════════════════════════════════════════════════════════════
+fontconfig | Font configuration library | fonts
+freetype | Font rendering library | fonts
+dejavu-fonts | DejaVu font family | fonts
+liberation-fonts | Liberation font family | fonts
+
+# ═══════════════════════════════════════════════════════════════════
+# 🌍 LOCALE (KUN ENGELSK)
+# ═══════════════════════════════════════════════════════════════════
+glibc-locale-en | English locale | locale
+
+# ═══════════════════════════════════════════════════════════════════
+# ❌ EKSPLISITT EKSKLUDERTE PAKKER
+# ═══════════════════════════════════════════════════════════════════
+# Følgende pakker skal ALDRI inkluderes:
+# - firefox, chromium (tunge nettlesere)
+# - libreoffice, openoffice (store office-suiter)
+# - gimp, inkscape (tung grafikk)
+# - kde, gnome, plasma (tunge skrivebord)
+# - vlc, mplayer (tung multimedia)
+# - language_pack_* (alle ikke-engelske språkpakker)
+# - *-dev, *-doc (utvikler/dok pakker)
+
+# ═══════════════════════════════════════════════════════════════════
+# 📏 MÅL
+# ═══════════════════════════════════════════════════════════════════
+# Total ISO størrelse: < 900 MB (ideelt 300-600 MB)
+# Minimum RAM: 256 MB
+# USB størrelse: ≤ 3 GB

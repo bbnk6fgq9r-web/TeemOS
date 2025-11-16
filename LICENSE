@@ -1,0 +1,82 @@
+MIT License
+
+Copyright (c) 2025 Teemo Cat Edition Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Third-Party Licenses
+
+This project builds upon and includes components from various open-source projects:
+
+### woof-CE (Woof - CE)
+- License: GPL-2.0
+- Source: https://github.com/woof-CE/woof-CE
+- Copyright: Puppy Linux Community
+
+### Puppy Linux
+- License: GPL-2.0
+- Source: https://puppylinux.com
+- Copyright: Barry Kauler and contributors
+
+### LXDE (Lightweight X11 Desktop Environment)
+- License: GPL-2.0
+- Source: https://lxde.org
+- Copyright: LXDE team
+
+### Openbox
+- License: GPL-2.0
+- Source: http://openbox.org
+- Copyright: Mikael Magnusson, Dana Jansens
+
+### NetSurf Browser
+- License: GPL-2.0
+- Source: https://www.netsurf-browser.org
+- Copyright: NetSurf developers
+
+### X.Org
+- License: MIT/X11
+- Source: https://www.x.org
+- Copyright: X.Org Foundation
+
+### BusyBox
+- License: GPL-2.0
+- Source: https://busybox.net
+- Copyright: Erik Andersen and contributors
+
+---
+
+## Notes
+
+1. This license (MIT) applies to the **build scripts, configuration files, and documentation** 
+   created specifically for the Teemo Cat Edition project.
+
+2. The resulting ISO image contains software components licensed under various open-source 
+   licenses (primarily GPL-2.0). The distribution of the ISO must comply with those licenses.
+
+3. When redistributing the ISO or derived works, ensure compliance with all applicable 
+   licenses, particularly GPL-2.0 requirements.
+
+4. See individual package documentation for specific licensing terms of included software.
+
+---
+
+For questions about licensing, please open an issue at:
+https://github.com/bbnk6fgq9r-web/TeemOS/issues
