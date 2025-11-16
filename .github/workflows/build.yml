@@ -68,7 +68,7 @@ jobs:
     - name: 🔗 Run merge2out
       run: |
         cd ~/teemo/woof-CE
-        ./merge2out woof-out-x86-64/teemocat
+        sudo ./merge2out woof-out-x86-64/teemocat
         
     - name: 🏗️ Build ISO - Step 1/4 (0setup)
       run: |
