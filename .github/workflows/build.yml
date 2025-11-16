@@ -72,22 +72,22 @@ jobs:
         
     - name: 🏗️ Build ISO - Step 1/4 (0setup)
       run: |
-        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-6
         ./0setup
         
     - name: 📥 Build ISO - Step 2/4 (1download)
       run: |
-        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-6
         timeout 3600 ./1download || echo "Download step completed with warnings"
         
     - name: 📦 Build ISO - Step 3/4 (2createpackages)
       run: |
-        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-6
         ./2createpackages
         
     - name: 🎯 Build ISO - Step 4/4 (3builddistro-Z)
       run: |
-        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
+        cd ~/teemo/woof-CE/woof-out-x86-6
         ./3builddistro-Z
         
     - name: 📏 Check ISO size
