@@ -228,7 +228,7 @@ echo ""
 
 # 💾 Generer pakkeliste for dokumentasjon
 PACKAGE_LIST="${PROFILE_DIR}/../../config/packages.txt"
-mkdir -p "$(dirname "$PACKAGE_LIST")"
+mkdir -p "$(dirname "$PACKAGE_LIST")" || true
 
 {
     echo "# 📦 Teemo Cat Edition - Pakkeliste"
@@ -236,14 +236,18 @@ mkdir -p "$(dirname "$PACKAGE_LIST")"
     echo ""
     echo "## ✅ Aktiverte pakker:"
     for specs_file in "${SPECS_FILES[@]}"; do
-        grep "^yes|" "$specs_file" | cut -d'|' -f2 | sort
+        grep "^yes|" "$specs_file" 2>/dev/null | cut -d'|' -f2 | sort || true
     done | sort -u
     
     echo ""
     echo "## ❌ Disabled pakker:"
     for specs_file in "${SPECS_FILES[@]}"; do
-        grep "^no|" "$specs_file" | cut -d'|' -f2 | sort
+        grep "^no|" "$specs_file" 2>/dev/null | cut -d'|' -f2 | sort || true
     done | sort -u
-} > "$PACKAGE_LIST"
+} > "$PACKAGE_LIST" || log_warning "Kunne ikke generere pakkeliste"
 
-log_success "Pakkeliste generert: $PACKAGE_LIST"
+if [[ -f "$PACKAGE_LIST" ]]; then
+    log_success "Pakkeliste generert: $PACKAGE_LIST"
+else
+    log_warning "Pakkeliste kunne ikke genereres (ikke kritisk)"
+fi
