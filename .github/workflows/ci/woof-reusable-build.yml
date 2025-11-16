@@ -1,0 +1,28 @@
+name: Build Teemo Cat (reusable)
+
+on:
+  push:
+    branches: [ feature/overlay-neon, main, develop ]
+  workflow_dispatch:
+    inputs:
+      arch:
+        type: choice
+        required: true
+        default: x86_64
+        options:
+          - x86_64
+          - x86
+
+jobs:
+  call-woof-build:
+    uses: puppylinux-woof-CE/woof-CE/.github/workflows/build.yml@testing
+    with:
+      repo: ${{ github.repository }}
+      ref: ${{ github.ref }}
+      arch: ${{ github.event.inputs.arch || 'x86_64' }}
+      compat-distro: slackware64
+      compat-distro-version: s15pup64
+      kernel: 5.15.x
+      artifact: teemocat-s15pup64-${{ github.run_number }}
+      retention: 7
+      runner: ubuntu-22.04

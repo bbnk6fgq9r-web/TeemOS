@@ -1,0 +1,7 @@
+# Minimal tint2 config for TeemoCat neon
+panel_monitor = 0
+panel_position = top center
+panel_size = 100% 28
+panel_background_id = 1
+panel_items = TSC
+font = Sans 10
