@@ -56,7 +56,7 @@ jobs:
     - name: 🧩 Setup profile
       run: |
         cd ~/teemo/woof-CE
-        cp -r woof-distro/x86_64/slacko64 woof-out_x86_64/teemocat
+        cp -r woof-distro/x86_64/slackware64 woof-out_x86_64/teemocat
         
     - name: ✂️ Trim profile
       run: |
