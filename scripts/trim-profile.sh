@@ -135,6 +135,7 @@ disable_package() {
 }
 
 # ✂️ Trim alle specs-filer
+for specs_file in "${SPECS_FILES[@]}"; do
     log_info "Prosesserer: $(basename "$specs_file")"
     
     # Backup original
