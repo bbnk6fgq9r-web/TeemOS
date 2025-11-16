@@ -1,0 +1,8 @@
+@xset -b
+@nitrogen --restore
+@lxpanel --profile LXDE
+@pcmanfm --desktop &
+# Start tint2 (if installed) as a lightweight panel
+@tint2 &
+# Set wallpaper if nitrogen not installed
+/usr/bin/feh --bg-scale /usr/share/backgrounds/teemocat-neon.svg

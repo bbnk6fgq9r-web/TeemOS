@@ -1,0 +1,15 @@
+# Minimal neon tint2 config
+panel_monitor = 0
+panel_position = top center
+panel_size = 100% 28
+panel_background_id = 1
+
+# Use neon colors for window indicator
+taskbar_disable_icon = 0
+taskbar_padding = 4 2 4
+
+# colors
+background_color = #00121a 50
+panel_color = #00121a 80
+panel_items = TSC
+font = Sans 10

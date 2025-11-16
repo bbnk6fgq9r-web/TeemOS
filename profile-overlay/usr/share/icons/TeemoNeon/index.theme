@@ -1,0 +1,5 @@
+[Icon Theme]
+Name=TeemoNeon
+Comment=Minimal neon icon theme
+Inherits=gnome,hicolor
+Example=application-x-executable

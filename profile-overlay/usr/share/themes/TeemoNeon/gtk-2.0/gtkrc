@@ -1,0 +1,9 @@
+style "teemo-neon"
+{
+  fg[NORMAL] = "#e6f7ff"
+  bg[NORMAL] = "#00121a"
+  base[NORMAL] = "#0a1317"
+  text[NORMAL] = "#e6f7ff"
+  selected_bg_color = "#00aaff"
+}
+widget_class "*" style "teemo-neon"

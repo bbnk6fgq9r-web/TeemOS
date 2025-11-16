@@ -69,7 +69,21 @@ jobs:
       run: |
         cd ~/teemo/woof-CE
         sudo ./merge2out woof-out-x86-64/teemocat || true
-        
+
+    - name: 🎨 Apply profile overlay (neon)
+      run: |
+        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
+        sudo cp -a $GITHUB_WORKSPACE/profile-overlay/. .
+        sudo chown -R root:root .
+
+    - name: 🔎 Verify overlay applied
+      run: |
+        cd ~/teemo/woof-CE/woof-out-x86-64/teemocat
+        echo "Listing overlay files:"
+        sudo ls -al usr/share/themes/TeemoNeon || true
+        sudo ls -al usr/share/backgrounds || true
+        sudo ls -al root/.config/openbox || true
+
     - name: 🏗️ Build ISO - Step 1/4 (0setup)
       run: |
         cd ~/teemo/woof-CE/woof-out-x86-64/teemocat

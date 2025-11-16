@@ -1,0 +1,31 @@
+/* Minimal neon theme for GTK3 - mostly color adjustments */
+@define-color bg_color #00121a;
+@define-color fg_color #e6f7ff;
+@define-color accent1 #00ffaa; /* neon green */
+@define-color accent2 #00aaff; /* neon blue */
+@define-color accent3 #ff00ee; /* neon magenta */
+
+* {
+  background-color: @bg_color;
+  color: @fg_color;
+}
+
+window, .window, .headerbar {
+  background-color: rgba(0,18,26,0.92);
+}
+
+.button {
+  background-image: none;
+  background-color: rgba(0,170,255,0.12);
+  border-radius: 4px;
+  border: 1px solid rgba(0,170,255,0.2);
+}
+
+.entry, .textview {
+  background-color: rgba(255,255,255,0.02);
+  color: @fg_color;
+}
+
+/* Links & highlights */
+.link, .link:hover { color: @accent2; }
+.selection { background-color: rgba(0,170,255,0.16); }
